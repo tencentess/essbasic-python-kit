@@ -1,24 +1,24 @@
 from api.CreateFlowsByTemplates import createFlowsByTemplates
 from api.CreateSignUrls import createSignUrls
-from api.DescribeConsoleUrlRecIdAndTemplateId import describeConsoleUrlRecIdAndTemplateId
 from api.DescribeResourceUrlsByFlows import describeResourceUrlsByFlows
-from bytemplate.ByTemplate import BuildApprovers
+from bytemplate.ByTemplate import BuildApprovers, BuildFormField
 from common.CreateFlowUtils import fillFlowInfo, fillAgent
 from config.Config import COUNT
 
 
-def createFlowByTemplateDirectly(FlowName, ProxyOrganizationName, TemplateId, FlowApproverInfos):
+def createFlowByTemplateDirectly(FlowName, TemplateId, FlowApproverInfos):
     """
         通过合同名和模板Id直接发起签署流程
     """
-    # 创建控制台链接，返回RecipientId
-    resp = describeConsoleUrlRecIdAndTemplateId(ProxyOrganizationName, TemplateId)
+    resp = {}
 
     # 创建签署流程
     # 签署数量
     count = COUNT
     FlowInfos = []
     for i in range(count):
+        # 构建内容控件填充结构(根据自己需求使用)
+        # FlowInfos[i].FormFields = [BuildFormField("姓名", "张三")]
         FlowInfos.append(fillFlowInfo(TemplateId, FlowName, FlowApproverInfos))
 
     # 设置渠道应用相关信息

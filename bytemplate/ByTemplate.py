@@ -1,4 +1,4 @@
-from tencentcloud.essbasic.v20210526.models import FlowApproverInfo, Component
+from tencentcloud.essbasic.v20210526.models import FlowApproverInfo, Component, FormField
 
 from api.DescribeTemplates import describeTemplates
 from common.CreateFlowUtils import fillAgent
@@ -128,3 +128,10 @@ def GetRecipients(TemplateId):
     Agent = fillAgent()
     templatesResponse = describeTemplates(Agent, TemplateId)
     return templatesResponse.Templates[0].Recipients[0].RecipientId
+
+
+def BuildFormField(componentName, componentValue):
+    formField = FormField()
+    formField.ComponentName = componentName
+    formField.ComponentValue = componentValue
+    return formField

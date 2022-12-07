@@ -1,7 +1,7 @@
 from tencentcloud.common import credential
+from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
 from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
-from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
 from tencentcloud.essbasic.v20210526 import essbasic_client, models
 from tencentcloud.essbasic.v20210526.models import UploadFile
 
@@ -10,7 +10,7 @@ from common.CreateFlowUtils import fillAgent
 from config.Config import *
 
 
-def uploadFiles(Agent, FileInfos):
+def uploadFiles(agent, file_infos):
     """
          用于生成pdf资源编号（FileIds）来配合“用PDF创建流程”接口使用，使用场景可详见“用PDF创建流程”接口说明。
     """
@@ -35,9 +35,9 @@ def uploadFiles(Agent, FileInfos):
         # 2.DOCUMENT - 签署过程及签署后的合同文档 / 图片控件,文件类型：.pdf /.jpg /.png
 
         # 渠道应用相关信息
-        req.Agent = Agent
+        req.Agent = agent
         # 上传文件内容数组
-        req.FileInfos = FileInfos
+        req.FileInfos = file_infos
         # 1. TEMPLATE - 模板； 文件类型：.pdf
         # 2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
         req.BusinessType = 'DOCUMENT'

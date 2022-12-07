@@ -4,7 +4,7 @@ from tencentcloud.essbasic.v20210526 import models
 from common.CreateFlowUtils import initClient, fillAgent
 
 
-def createSignUrls(Agent, FlowIds):
+def createSignUrls(agent, flow_ids):
     """
         创建跳转小程序查看或签署的链接；自动签署的签署方不创建签署链接；
     """
@@ -16,14 +16,12 @@ def createSignUrls(Agent, FlowIds):
         req = models.CreateSignUrlsRequest()
 
         # 渠道应用相关信息
-        req.Agent = Agent
+        req.Agent = agent
         # 资源所对应的签署流程Id
-        req.FlowIds = FlowIds
+        req.FlowIds = flow_ids
 
         # 返回的resp是一个CreateSignUrlsResponse的实例，与请求对象对应
-        resp = client.CreateSignUrls(req)
-
-        return resp
+        return client.CreateSignUrls(req)
     except TencentCloudSDKException as err:
         print(err)
 

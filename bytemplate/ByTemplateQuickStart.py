@@ -1,13 +1,13 @@
 import os
 import sys
 
-from api.CreateConsoleLoginUrl import createConsoleLoginUrl
-from common.CreateFlowUtils import fillAgent
+from ByTemplate import GetRecipients, BuildApprovers
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from common.CreateFlowUtils import fillAgent
+from api.CreateConsoleLoginUrl import createConsoleLoginUrl
 from api.CreateFlowByTemplateDirectly import createFlowByTemplateDirectly
-from bytemplate.ByTemplate import GetRecipients, BuildApprovers
 from config.Config import *
 
 '''

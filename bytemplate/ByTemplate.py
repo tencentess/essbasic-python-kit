@@ -1,137 +1,48 @@
-from tencentcloud.essbasic.v20210526.models import FlowApproverInfo, Component, FormField
+import os
+import sys
+
+from tencentcloud.essbasic.v20210526.models import FormField
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from api.DescribeTemplates import describeTemplates
-from common.CreateFlowUtils import fillAgent
+from common.CreateFlowUtils import fillAgent, BuildPersonApprover
 
 
-def BuildApprovers(RecipientId):
+def BuildApprovers(recipient_id):
     # 个人签署方参数
-    personName = "***"
-    personMobile = "**********"
+    person_name = "***"
+    person_mobile = "**********"
 
     # 企业签署方参数
-    # organizationName = "***"
-    # organizationOpenId = "**********"
-    # openId = "**********"
+    # organization_name = "***"
+    # organization_open_id = "**********"
+    # open_id = "**********"
 
     # 用列表存储(此处根据自己签署的类型选择对应的传入参数，如单c就只传入一次个人签署方，BtoC就传入一个个人签署方，一个企业签署方)
-    FlowApproverInfos = []
-
     # 传入个人签署方
-    FlowApproverInfos.append(BuildPersonApprover(personName, personMobile))
+    flow_approver_infos = [BuildPersonApprover(person_name, person_mobile)]
+
     # 传入企业签署方
-    # FlowApproverInfos.append(BuildOrganizationApprover(organizationName, organizationOpenId, openId))
+    # flow_approver_infos.append(BuildOrganizationApprover(organization_name, organization_open_id, open_id))
     # 传入企业静默签署
-    # FlowApproverInfos.append(BuildServerSignApprover())
+    # flow_approver_infos.append(BuildServerSignApprover())
 
     # 设置RecipientId
-    for i in FlowApproverInfos:
-        i.RecipientId = RecipientId
+    for i in flow_approver_infos:
+        i.RecipientId = recipient_id
 
-    return FlowApproverInfos
-
-
-# 打包个人签署方信息
-def BuildPersonApprover(personName, personMobile):
-    # 签署方参与信息
-    flowApproverInfo = FlowApproverInfo()
-
-    flowApproverInfo.Name = personName
-    flowApproverInfo.Mobile = personMobile
-    # # 签署人类型，PERSON - 个人；
-    # # ORGANIZATION - 企业；
-    # # ENTERPRISESERVER - 企业静默签;
-    # # 注：ENTERPRISESERVER
-    # 类型仅用于使用文件创建流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署；
-    flowApproverInfo.ApproverType = "PERSON"
-    #  模板控件信息
-    #  签署人对应的签署控件
-    component = BuildComponent(146.15625, 472.78125, 112, 40, 0, "SIGN_SIGNATURE", 1, "")
-    flowApproverInfo.SignComponents = [component]
-    return flowApproverInfo
+    return flow_approver_infos
 
 
-# 打包企业签署方参与者信息
-def BuildOrganizationApprover(organizationName, organizationOpenId, openId):
-    # 签署方参与信息
-    flowApproverInfo = FlowApproverInfo()
-
-    flowApproverInfo.OrganizationName = organizationName
-    flowApproverInfo.OrganizationOpenId = organizationOpenId
-    flowApproverInfo.OpenId = openId
-    # 签署人类型，PERSON - 个人；
-    # ORGANIZATION - 企业；
-    # ENTERPRISESERVER - 企业静默签;
-    # 注：ENTERPRISESERVER
-    # 类型仅用于使用文件创建流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署；
-    flowApproverInfo.ApproverType = "ORGANIZATION"
-    #  模板控件信息
-    #  签署人对应的签署控件
-    component = BuildComponent(146.15625, 472.78125, 112, 40, 0, "SIGN_SIGNATURE", 1, "")
-    flowApproverInfo.SignComponents = [component]
-
-    return flowApproverInfo
+def GetRecipients(template_id):
+    agent = fillAgent()
+    templates_response = describeTemplates(agent, template_id)
+    return templates_response.Templates[0].Recipients[0].RecipientId
 
 
-# 打包企业静默签署方参与者信息
-def BuildServerSignApprover():
-    flowApproverInfo = FlowApproverInfo()
-
-    # 签署人类型，PERSON - 个人；
-    # ORGANIZATION - 企业；
-    # ENTERPRISESERVER - 企业静默签;
-    # 注：ENTERPRISESERVER
-    # 类型仅用于使用文件创建流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署；
-    flowApproverInfo.ApproverType = "ENTERPRISESERVER"
-    #  模板控件信息
-    #  签署人对应的签署控件
-    component = BuildComponent(146.15625, 472.78125, 112, 40, 0, "SIGN_SIGNATURE", 1, "")
-    flowApproverInfo.SignComponents = [component]
-
-    return flowApproverInfo
-
-
-def BuildComponent(componentPosX, componentPosY, componentWidth, componentHeight, fileIndex, componentType,
-                   componentPage, componentValue):
-    component = Component()
-    # 参数控件X位置，单位px
-    component.ComponentPosX = componentPosX
-    # 参数控件Y位置，单位px
-    component.ComponentPosY = componentPosY
-    # 参数控件宽度，默认100，单位px，表单域和关键字转换控件不用填
-    component.ComponentWidth = componentWidth
-    # 参数控件高度，默认100，单位px，表单域和关键字转换控件不用填
-    component.ComponentHeight = componentHeight
-    # 控件所属文件的序号(文档中文件的排列序号，从0开始)
-    component.FileIndex = fileIndex
-    # 如果是Component控件类型，则可选的字段为：
-    # TEXT - 普通文本控件；
-    # DATE - 普通日期控件；跟TEXT相比会有校验逻辑
-    # DYNAMIC_TABLE - 动态表格控件
-    # 如果是SignComponent控件类型，则可选的字段为
-    # SIGN_SEAL - 签署印章控件；
-    # SIGN_DATE - 签署日期控件；
-    # SIGN_SIGNATURE - 用户签名控件；
-    # SIGN_PERSONAL_SEAL - 个人签署印章控件；
-    # 表单域的控件不能作为印章和签名控件
-    component.ComponentType = componentType
-    # 参数控件所在页码，从1开始
-    component.ComponentPage = componentPage
-    # 印章ID，传参DEFAULT_COMPANY_SEAL表示使用默认印章。
-    # 控件填入内容，印章控件里面，如果是手写签名内容为PNG图片格式的base64编码。
-    component.ComponentValue = componentValue
-
-    return component
-
-
-def GetRecipients(TemplateId):
-    Agent = fillAgent()
-    templatesResponse = describeTemplates(Agent, TemplateId)
-    return templatesResponse.Templates[0].Recipients[0].RecipientId
-
-
-def BuildFormField(componentName, componentValue):
-    formField = FormField()
-    formField.ComponentName = componentName
-    formField.ComponentValue = componentValue
-    return formField
+def BuildFormField(component_name, component_value):
+    form_field = FormField()
+    form_field.ComponentName = component_name
+    form_field.ComponentValue = component_value
+    return form_field

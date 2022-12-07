@@ -4,24 +4,25 @@ from tencentcloud.essbasic.v20210526 import models
 from common.CreateFlowUtils import initClient, fillAgent
 
 
-def describeFlowDetailInfo(agent, flow_ids):
+def channelVerifyPdf(agent, flow_id):
     """
-        此接口用于查询合同(签署流程)的详细信息。
+        合同文件验签
     """
     try:
         # 实例化一个client
         client = initClient()
 
         # 实例化一个请求对象,每个接口都会对应一个request对象
-        req = models.DescribeFlowDetailInfoRequest()
+        req = models.ChannelVerifyPdfRequest()
 
+        # 传入相关参数
         # 渠道应用相关信息
         req.Agent = agent
-        # 资源所对应的签署流程Id
-        req.FlowIds = flow_ids
+        # 合同Id，流程Id
+        req.FlowId = flow_id
 
-        # 返回的resp是一个DescribeFlowDetailInfoResponse的实例，与请求对象对应
-        return client.DescribeFlowDetailInfo(req)
+        # 返回的resp是一个ChannelVerifyPdfResponse的实例，与请求对象对应
+        return client.ChannelVerifyPdf(req)
     except TencentCloudSDKException as err:
         print(err)
 
@@ -32,8 +33,9 @@ def describeFlowDetailInfo(agent, flow_ids):
 if __name__ == '__main__':
     # 渠道应用相关信息
     Agent = fillAgent()
-    # 发起合同成功的签署流程Id
-    FlowIds = ["****************"]
-    resp = describeFlowDetailInfo(Agent, FlowIds)
+
+    FlowId = "******************"
+
+    resp = channelVerifyPdf(Agent, FlowId)
     # 输出json格式的字符串回包
     print(resp.to_json_string())

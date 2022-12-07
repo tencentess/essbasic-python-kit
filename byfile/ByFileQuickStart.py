@@ -1,13 +1,13 @@
 import os
 import sys
 
-from api.CreateConsoleLoginUrl import createConsoleLoginUrl
-from common.CreateFlowUtils import fillAgent
+from Byfile import BuildApprovers, convertImageFileToBase64
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from common.CreateFlowUtils import fillAgent
+from api.CreateConsoleLoginUrl import createConsoleLoginUrl
 from api.CreateFlowByFileDirectly import createFlowByFileDirectly
-from Byfile import BuildApprovers, convertImageFileToBase64
 
 '''
     使用文件发起合同QuickStart
@@ -17,26 +17,26 @@ from Byfile import BuildApprovers, convertImageFileToBase64
 def ByFileQuickStart():
     # Step 1
     # 定义文件所在的路径
-    FilePath = "test/blank.pdf"
+    file_path = "../test/blank.pdf"
     # 合同名
-    FlowName = "我的第一个合同"
+    flow_name = "我的第一个合同"
     # 渠道侧合作企业名称
-    ProxyOrganizationName = "好企业"
+    proxy_organization_name = "好企业"
 
     # 此处为快速发起；如果是正式接入，构造签署人，请参考函数内说明，构造需要的场景参数
-    FlowApproverInfos = BuildApprovers()
+    flow_approver_infos = BuildApprovers()
     # 创建控制台链接
-    loginUrlResponse = createConsoleLoginUrl(fillAgent(), ProxyOrganizationName)
+    login_url_response = createConsoleLoginUrl(fillAgent(), proxy_organization_name)
 
     # Step 2
     # 将文件处理为Base64编码后的文件内容
-    fileBase64 = convertImageFileToBase64(FilePath)
+    file_base64 = convertImageFileToBase64(file_path)
 
     # 发起合同
-    resp = createFlowByFileDirectly(fileBase64, FlowApproverInfos, FlowName)
+    resp = createFlowByFileDirectly(file_base64, flow_approver_infos, flow_name)
 
     print("您的控制台入口为：")
-    print(loginUrlResponse.ConsoleUrl)
+    print(login_url_response.ConsoleUrl)
     print("\r\n\r\n")
     # 返回合同Id
     print("您创建的合同id为：")

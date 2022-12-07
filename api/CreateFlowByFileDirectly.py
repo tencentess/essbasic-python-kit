@@ -8,35 +8,35 @@ from api.UploadFiles import uploadFiles
 from common.CreateFlowUtils import fillAgent
 
 
-def createFlowByFileDirectly(fileBase64, FlowApproverInfos, FlowName):
+def createFlowByFileDirectly(file_base64, flow_approver_infos, flow_name):
     """
     通过文件base64直接发起签署流程，返回flowId
     """
-    flowIdAndUrl = {}
-    Agent = fillAgent()
+    flow_id_and_url = {}
+    agent = fillAgent()
     # 设置uploadFile参数, 这里可以修改传入数量
-    FileInfo = UploadFile()
-    FileInfo.FileBody = fileBase64
+    file_info = UploadFile()
+    file_info.FileBody = file_base64
 
-    FileInfos = [FileInfo]
-    uploadFilesResponse = uploadFiles(Agent, FileInfos)
+    file_infos = [file_info]
+    upload_files_response = uploadFiles(agent, file_infos)
 
-    FileId = uploadFilesResponse.FileIds[0]
+    file_id = upload_files_response.FileIds[0]
 
     # 创建签署流程
-    createFlowByFilesResponse = channelCreateFlowByFiles(Agent, FlowApproverInfos, FlowName, FileId)
+    create_flow_by_files_response = channelCreateFlowByFiles(agent, flow_approver_infos, flow_name, file_id)
 
-    FlowId = createFlowByFilesResponse.FlowId
-    FlowIds = [FlowId]
+    flow_id = create_flow_by_files_response.FlowId
+    flow_ids = [flow_id]
     # 获取签署链接
-    createSignUrlsResponse = createSignUrls(Agent, FlowIds)
-    Url = createSignUrlsResponse.SignUrlInfos[0].SignUrl
-    flowIdAndUrl["FlowId"] = FlowId
-    flowIdAndUrl["Url"] = Url
+    create_sign_urls_response = createSignUrls(agent, flow_ids)
+    url = create_sign_urls_response.SignUrlInfos[0].SignUrl
+    flow_id_and_url["FlowId"] = flow_id
+    flow_id_and_url["Url"] = url
 
     # 获取下载链接
-    describeResourceUrlsByFlowsResponse = describeResourceUrlsByFlows(Agent, FlowIds)
-    downloadUrl = describeResourceUrlsByFlowsResponse.FlowResourceUrlInfos[0].ResourceUrlInfos[0].Url
-    flowIdAndUrl["downloadUrl"] = downloadUrl
+    describe_resource_urls_by_flows_response = describeResourceUrlsByFlows(agent, flow_ids)
+    download_url = describe_resource_urls_by_flows_response.FlowResourceUrlInfos[0].ResourceUrlInfos[0].Url
+    flow_id_and_url["downloadUrl"] = download_url
 
-    return flowIdAndUrl
+    return flow_id_and_url

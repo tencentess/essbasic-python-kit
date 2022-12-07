@@ -6,7 +6,7 @@ from bytemplate.ByTemplate import BuildApprovers
 from common.CreateFlowUtils import initClient, fillAgent, fillFlowInfo
 
 
-def createFlowsByTemplates(Agent, FlowInfos):
+def createFlowsByTemplates(agent, flow_infos):
     """
         用于使用多个模板批量创建签署流程。当前可批量发起合同（签署流程）数量最大为20个。
     """
@@ -18,15 +18,12 @@ def createFlowsByTemplates(Agent, FlowInfos):
         req = models.CreateFlowsByTemplatesRequest()
 
         # 渠道应用相关信息
-        req.Agent = Agent
+        req.Agent = agent
         # 多个合同（签署流程）信息
-        req.FlowInfos = FlowInfos
+        req.FlowInfos = flow_infos
 
         # 返回的resp是一个CreateFlowsByTemplatesResponse的实例，与请求对象对应
-        resp = client.CreateFlowsByTemplates(req)
-
-        return resp
-
+        return client.CreateFlowsByTemplates(req)
     except TencentCloudSDKException as err:
         print(err)
 

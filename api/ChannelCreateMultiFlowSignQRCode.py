@@ -4,7 +4,7 @@ from tencentcloud.essbasic.v20210526 import models
 from common.CreateFlowUtils import initClient, fillAgent
 
 
-def channelCreateMultiFlowSignQRCode(Agent, TemplateId, FlowName):
+def channelCreateMultiFlowSignQRCode(agent, template_id, flow_name):
     """
      *  用于创建一码多扫流程签署二维码。
      *  适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
@@ -18,15 +18,14 @@ def channelCreateMultiFlowSignQRCode(Agent, TemplateId, FlowName):
         req = models.ChannelCreateMultiFlowSignQRCodeRequest()
 
         # 渠道应用相关信息
-        req.Agent = Agent
+        req.Agent = agent
         # 模板Id
-        req.TemplateId = TemplateId
+        req.TemplateId = template_id
         # 签署流程名称，最大长度200个字符
-        req.FlowName = FlowName
+        req.FlowName = flow_name
 
         # 返回的resp是一个ChannelCreateMultiFlowSignQRCodeResponse的实例，与请求对象对应
-        resp = client.ChannelCreateMultiFlowSignQRCode(req)
-        return resp
+        return client.ChannelCreateMultiFlowSignQRCode(req)
     except TencentCloudSDKException as err:
         print(err)
 

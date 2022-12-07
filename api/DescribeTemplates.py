@@ -4,7 +4,7 @@ from tencentcloud.essbasic.v20210526 import models
 from common.CreateFlowUtils import initClient, fillAgent
 
 
-def describeTemplates(Agent, TemplateId):
+def describeTemplates(agent, template_id):
     """
         通过此接口（DescribeTemplates）查询该企业在电子签渠道版中配置的有效模板列表
     """
@@ -16,14 +16,12 @@ def describeTemplates(Agent, TemplateId):
         req = models.DescribeTemplatesRequest()
 
         # 渠道应用相关信息
-        req.Agent = Agent
+        req.Agent = agent
         # 模板唯一标识
-        req.TemplateId = TemplateId
+        req.TemplateId = template_id
 
         # 返回的resp是一个DescribeTemplatesResponse的实例，与请求对象对应
-        resp = client.DescribeTemplates(req)
-
-        return resp
+        return client.DescribeTemplates(req)
     except TencentCloudSDKException as err:
         print(err)
 

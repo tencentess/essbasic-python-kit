@@ -5,7 +5,7 @@ from tencentcloud.essbasic.v20210526.models import FlowApproverInfo, Component
 from common.CreateFlowUtils import initClient, fillAgent
 
 
-def channelCreateFlowByFiles(Agent, FlowApproverInfos, FlowName, FileId):
+def channelCreateFlowByFiles(agent, flow_approver_infos, flow_name, file_id):
     """
      *  用来通过上传后的pdf资源编号来创建待签署的合同流程。
      *  适用场景1：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。
@@ -19,15 +19,13 @@ def channelCreateFlowByFiles(Agent, FlowApproverInfos, FlowName, FileId):
         # 实例化一个请求对象,每个接口都会对应一个request对象
         req = models.ChannelCreateFlowByFilesRequest()
 
-        req.FlowName = FlowName
-        req.FileIds = [FileId]
-        req.Agent = Agent
-        req.FlowApprovers = FlowApproverInfos
+        req.FlowName = flow_name
+        req.FileIds = [file_id]
+        req.Agent = agent
+        req.FlowApprovers = flow_approver_infos
 
         # 返回的resp是一个ChannelCreateFlowByFilesResponse的实例，与请求对象对应
-        resp = client.ChannelCreateFlowByFiles(req)
-
-        return resp
+        return client.ChannelCreateFlowByFiles(req)
     except TencentCloudSDKException as err:
         print(err)
 

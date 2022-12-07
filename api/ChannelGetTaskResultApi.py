@@ -4,24 +4,25 @@ from tencentcloud.essbasic.v20210526 import models
 from common.CreateFlowUtils import initClient, fillAgent
 
 
-def describeFlowDetailInfo(agent, flow_ids):
+def channelGetTaskResultApi(agent, task_id):
     """
-        此接口用于查询合同(签署流程)的详细信息。
+        渠道版查询转换任务状态
     """
     try:
         # 实例化一个client
         client = initClient()
 
         # 实例化一个请求对象,每个接口都会对应一个request对象
-        req = models.DescribeFlowDetailInfoRequest()
+        req = models.ChannelGetTaskResultApiRequest()
 
+        # 传入相关参数
         # 渠道应用相关信息
         req.Agent = agent
-        # 资源所对应的签署流程Id
-        req.FlowIds = flow_ids
+        # 任务Id，通过ChannelCreateConvertTaskApi接口获得
+        req.TaskId = task_id
 
-        # 返回的resp是一个DescribeFlowDetailInfoResponse的实例，与请求对象对应
-        return client.DescribeFlowDetailInfo(req)
+        # 返回的resp是一个ChannelGetTaskResultApiResponse的实例，与请求对象对应
+        return client.ChannelGetTaskResultApi(req)
     except TencentCloudSDKException as err:
         print(err)
 
@@ -32,8 +33,9 @@ def describeFlowDetailInfo(agent, flow_ids):
 if __name__ == '__main__':
     # 渠道应用相关信息
     Agent = fillAgent()
-    # 发起合同成功的签署流程Id
-    FlowIds = ["****************"]
-    resp = describeFlowDetailInfo(Agent, FlowIds)
+
+    TaskId = "******************"
+
+    resp = channelGetTaskResultApi(Agent, TaskId)
     # 输出json格式的字符串回包
     print(resp.to_json_string())

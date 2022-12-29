@@ -7,6 +7,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 def channelDescribeEmployees(agent, filters, limit, offset):
     """
         查询企业员工列表
+        详细参考 https://cloud.tencent.com/document/api/1420/81119
     """
     try:
         # 实例化一个client
@@ -17,6 +18,7 @@ def channelDescribeEmployees(agent, filters, limit, offset):
 
         # 传入相关参数
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 查询过滤实名用户，Key为Status，Values为["IsVerified"]
         # 根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]

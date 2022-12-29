@@ -6,7 +6,8 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def describeTemplates(agent, template_id):
     """
-        通过此接口（DescribeTemplates）查询该企业在电子签渠道版中配置的有效模板列表
+        查询该子客企业在电子签拥有的有效模板，不包括渠道模板
+        详细参考 https://cloud.tencent.com/document/api/1420/61521
     """
     try:
         # 实例化一个client
@@ -16,9 +17,13 @@ def describeTemplates(agent, template_id):
         req = models.DescribeTemplatesRequest()
 
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
-        # 模板唯一标识
+        # 模板唯一标识，查询单个模板时使用
         req.TemplateId = template_id
+
+        # 其他查询参数参考官网文档
+        # https://cloud.tencent.com/document/api/1420/61521
 
         # 返回的resp是一个DescribeTemplatesResponse的实例，与请求对象对应
         return client.DescribeTemplates(req)

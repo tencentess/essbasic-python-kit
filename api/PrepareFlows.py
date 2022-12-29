@@ -9,6 +9,7 @@ def prepareFlows(agent, flow_infos, jump_url):
         该接口 (PrepareFlows) 用于创建待发起文件
         用户通过该接口进入签署流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
         目前该接口只支持B2C，不建议使用，将会废弃。
+        详细参考 https://cloud.tencent.com/document/api/1420/61519
     """
     try:
         # 实例化一个client
@@ -19,6 +20,7 @@ def prepareFlows(agent, flow_infos, jump_url):
 
         # 传入相关参数
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 多个合同（签署流程）信息，最大支持20个签署流程。
         req.FlowInfos = flow_infos

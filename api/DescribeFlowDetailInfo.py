@@ -7,6 +7,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 def describeFlowDetailInfo(agent, flow_ids):
     """
         此接口用于查询合同(签署流程)的详细信息。
+        详细参考 https://cloud.tencent.com/document/api/1420/66683
     """
     try:
         # 实例化一个client
@@ -16,8 +17,9 @@ def describeFlowDetailInfo(agent, flow_ids):
         req = models.DescribeFlowDetailInfoRequest()
 
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
-        # 资源所对应的签署流程Id
+        # 合同(流程)编号数组，最多支持100个
         req.FlowIds = flow_ids
 
         # 返回的resp是一个DescribeFlowDetailInfoResponse的实例，与请求对象对应

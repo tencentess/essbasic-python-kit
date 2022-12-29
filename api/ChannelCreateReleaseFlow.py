@@ -6,7 +6,9 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def channelCreateReleaseFlow(agent, need_relieved_flow_id, relive_info, released_approvers, callback_url):
     """
-        创建出证报告，返回报告 ID
+        渠道版发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
+        合同发起人必须在电子签已经进行实名。
+        详细参考 https://cloud.tencent.com/document/api/1420/83461
     """
     try:
         # 实例化一个client
@@ -17,10 +19,12 @@ def channelCreateReleaseFlow(agent, need_relieved_flow_id, relive_info, released
 
         # 传入相关参数
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 待解除的流程编号（即原流程的编号）
         req.NeedRelievedFlowId = need_relieved_flow_id
         # 解除协议内容
+        # 详细参考 https://cloud.tencent.com/document/api/1420/61525#RelieveInfo
         req.ReliveInfo = relive_info
         # 非必须，解除协议的本企业签署人列表，默认使用原流程的签署人列表；
         # 当解除协议的签署人与原流程的签署人不能相同时（例如原流程签署人离职了），需要指定本企业的其他签署人来替换原流程中的原签署人，

@@ -10,7 +10,9 @@ from common.CreateFlowUtils import fillAgent
 
 def createFlowByFileDirectly(file_base64, flow_approver_infos, flow_name):
     """
-    通过文件base64直接发起签署流程，返回flowId
+    CreateFlowByFileDirectly 通过文件base64直接发起签署流程，返回flowId和签署链接
+    本接口是对于发起合同几个接口的封装，详细参数需要根据自身业务进行调整
+    UploadFiles--ChannelCreateFlowByFiles--CreateSignUrls
     """
     flow_id_and_url = {}
     agent = fillAgent()

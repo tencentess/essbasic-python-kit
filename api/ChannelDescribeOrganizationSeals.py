@@ -10,6 +10,7 @@ def channelDescribeOrganizationSeals(agent, info_type, seal_id, limit, offset):
         客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；
         入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。
         接口调用成功返回印章的信息列表还有企业印章的总数。
+        详细参考 https://cloud.tencent.com/document/api/1420/82455
     """
     try:
         # 实例化一个client
@@ -20,8 +21,9 @@ def channelDescribeOrganizationSeals(agent, info_type, seal_id, limit, offset):
 
         # 传入相关参数
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
-        # 查询信息类型，为0时不返回授权用户，为1时返回
+        # 查询信息类型，为1时返回授权用户，为其他值时不返回
         req.InfoType = info_type
         # 印章id（没有输入返回所有）
         req.SealId = seal_id

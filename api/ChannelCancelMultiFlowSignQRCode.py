@@ -6,7 +6,9 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def channelCancelMultiFlowSignQRCode(agent, qr_code_id):
     """
-        用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效。
+        ChannelCancelMultiFlowSignQRCode 
+        用于取消一码多扫二维码。该接口对传入的二维码ID，若还在有效期内，可以提前失效
+        详细参考 https://cloud.tencent.com/document/api/1420/75453
     """
     try:
         # 实例化一个client
@@ -17,6 +19,7 @@ def channelCancelMultiFlowSignQRCode(agent, qr_code_id):
 
         # 传入相关参数
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 二维码ID
         req.QrCodeId = qr_code_id

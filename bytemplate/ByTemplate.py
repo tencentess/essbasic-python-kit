@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from api.DescribeTemplates import describeTemplates
 from common.CreateFlowUtils import fillAgent, BuildPersonApprover
 
-
+# BuildApprovers 构造签署人 - 以单C为例, 实际请根据自己的场景构造签署方、控件
 def BuildApprovers(recipient_id):
     # 个人签署方参数
     person_name = "***"
@@ -28,19 +28,20 @@ def BuildApprovers(recipient_id):
     # 传入企业静默签署
     # flow_approver_infos.append(BuildServerSignApprover())
 
-    # 设置RecipientId
+    # 设置模版中的参与方RecipientId
     for i in flow_approver_infos:
         i.RecipientId = recipient_id
 
     return flow_approver_infos
 
-
+# 从模板中获取参与人信息，用于模板发起合同
 def GetRecipients(template_id):
     agent = fillAgent()
     templates_response = describeTemplates(agent, template_id)
     return templates_response.Templates[0].Recipients[0].RecipientId
 
-
+# 内容控件填充结构，详细说明参考
+# https://cloud.tencent.com/document/api/1420/61525#FormField
 def BuildFormField(component_name, component_value):
     form_field = FormField()
     form_field.ComponentName = component_name

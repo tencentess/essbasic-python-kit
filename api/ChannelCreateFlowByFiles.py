@@ -7,10 +7,10 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def channelCreateFlowByFiles(agent, flow_approver_infos, flow_name, file_id):
     """
-     *  用来通过上传后的pdf资源编号来创建待签署的合同流程。
-     *  适用场景1：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。
-     *  适用场景2：可通过改接口传入制式合同文件，同时在指定位置添加签署控件。可以起到接口创建临时模板的效果。如果是标准的制式文件，建议使用模板功能生成模板ID进行合同流程的生成。
-     *  注意事项：该接口需要依赖“多文件上传”接口生成pdf资源编号（FileIds）进行使用。
+        用于渠道版通过文件创建签署流程。
+        注意事项：该接口需要依赖“多文件上传”接口生成pdf资源编号（FileIds）进行使用。
+        此接口静默签能力不可直接使用，需要运营申请
+        详细参考 https://cloud.tencent.com/document/api/1420/73068
     """
     try:
         # 实例化一个client
@@ -19,10 +19,19 @@ def channelCreateFlowByFiles(agent, flow_approver_infos, flow_name, file_id):
         # 实例化一个请求对象,每个接口都会对应一个request对象
         req = models.ChannelCreateFlowByFilesRequest()
 
+        # 签署流程名称，长度不超过200个字符
         req.FlowName = flow_name
+        # 签署文件资源Id列表，目前仅支持单个文件
         req.FileIds = [file_id]
+
+        # 渠道应用相关信息。 
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
+        # 签署流程签约方列表，最多不超过5个参与方
         req.FlowApprovers = flow_approver_infos
+
+        # 其他更多参数和控制，参考文档 https://cloud.tencent.com/document/api/1420/73068
+        # 也可以结合test case传参
 
         # 返回的resp是一个ChannelCreateFlowByFilesResponse的实例，与请求对象对应
         return client.ChannelCreateFlowByFiles(req)
@@ -44,11 +53,11 @@ if __name__ == '__main__':
 
     # 签署方参与信息
     flowApproverInfo = FlowApproverInfo()
-    # 签署人类型，PERSON - 个人；
-    # ORGANIZATION - 企业；
-    # ENTERPRISESERVER - 企业静默签;
-    # 注：ENTERPRISESERVER
-    # 类型仅用于使用文件创建流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署；
+    # 签署人类型
+    # PERSON-个人/自然人；
+    # PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；
+    # ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
+    # ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
     flowApproverInfo.ApproverType = "PERSON"
     # 操作人的名字
     flowApproverInfo.Name = "*****"
@@ -65,6 +74,7 @@ if __name__ == '__main__':
     component.ComponentHeight = 40
     # 控件所属文件的序号(文档中文件的排列序号，从0开始)
     component.FileIndex = 0
+
     # 如果是Component控件类型，则可选的字段为：
     # TEXT - 普通文本控件；
     # DATE - 普通日期控件；跟TEXT相比会有校验逻辑
@@ -81,6 +91,7 @@ if __name__ == '__main__':
     # 印章ID，传参DEFAULT_COMPANY_SEAL表示使用默认印章。
     # 控件填入内容，印章控件里面，如果是手写签名内容为PNG图片格式的base64编码。
     component.ComponentValue = ""
+    
     FlowApproverInfo.SignComponents = [component]
     FlowApproverInfos.append(flowApproverInfo)
 

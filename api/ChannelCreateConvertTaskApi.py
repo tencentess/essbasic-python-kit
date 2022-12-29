@@ -7,6 +7,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 def channelCreateConvertTaskApi(agent, resource_type, resource_name, resource_id):
     """
         渠道创建文件转换任务
+        详细参考 https://cloud.tencent.com/document/api/1420/78774
     """
     try:
         # 实例化一个client
@@ -17,8 +18,9 @@ def channelCreateConvertTaskApi(agent, resource_type, resource_name, resource_id
 
         # 传入相关参数
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
-        # 资源类型 取值范围doc,docx,html,excel之一
+        # 资源类型 取值范围doc,docx,html,xls,xlsx之一
         req.ResourceType = resource_type
         # 资源名称，长度限制为256字符
         req.ResourceName = resource_name

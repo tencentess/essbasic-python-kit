@@ -7,6 +7,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 def channelGetTaskResultApi(agent, task_id):
     """
         渠道版查询转换任务状态
+        详细参考 https://cloud.tencent.com/document/api/1420/78773
     """
     try:
         # 实例化一个client
@@ -17,6 +18,7 @@ def channelGetTaskResultApi(agent, task_id):
 
         # 传入相关参数
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 任务Id，通过ChannelCreateConvertTaskApi接口获得
         req.TaskId = task_id

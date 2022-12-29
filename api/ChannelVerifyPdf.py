@@ -7,6 +7,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 def channelVerifyPdf(agent, flow_id):
     """
         合同文件验签
+        详细参考 https://cloud.tencent.com/document/api/1420/80799
     """
     try:
         # 实例化一个client
@@ -17,6 +18,7 @@ def channelVerifyPdf(agent, flow_id):
 
         # 传入相关参数
         # 渠道应用相关信息
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 合同Id，流程Id
         req.FlowId = flow_id

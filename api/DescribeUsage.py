@@ -8,6 +8,7 @@ def describeUsage(agent, start_date, end_date, need_aggregate, limit, offset):
     """
         此接口（DescribeUsage）用于获取渠道所有合作企业流量消耗情况。
         注: 此接口每日限频2次，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
+        详细参考 https://cloud.tencent.com/document/api/1420/61520
     """
     try:
         # 实例化一个client
@@ -17,7 +18,7 @@ def describeUsage(agent, start_date, end_date, need_aggregate, limit, offset):
         req = models.DescribeUsageRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 渠应用信息，此接口Agent.AppId必填
         req.Agent = agent
         # 开始时间，例如：2021-03-21
         req.StartDate = start_date

@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from common.CreateFlowUtils import BuildPersonApprover
 
-
+# BuildApprovers 构造签署人 - 以个人为例, 实际请根据自己的场景构造签署方、控件
 def BuildApprovers():
     # 个人签署方参数
     person_name = "***"
@@ -23,6 +23,7 @@ def BuildApprovers():
 
     # 传入企业签署方
     # flow_approver_info_list.append(BuildOrganizationApprover(organization_name, organization_open_id, open_id))
+    
     # 传入企业静默签署
     # flow_approver_info_list.append(BuildServerSignApprover())
 

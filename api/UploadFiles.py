@@ -58,7 +58,7 @@ def uploadFiles(agent, file_infos):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
     FilePath = "../test/blank.pdf"
     FileInfo = UploadFile()

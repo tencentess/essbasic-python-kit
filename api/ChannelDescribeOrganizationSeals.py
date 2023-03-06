@@ -6,7 +6,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def channelDescribeOrganizationSeals(agent, info_type, seal_id, limit, offset):
     """
-        查询渠道子客企业电子印章，需要操作者具有管理印章权限
+        查询子客企业电子印章，需要操作者具有管理印章权限
         客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；
         入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。
         接口调用成功返回印章的信息列表还有企业印章的总数。
@@ -20,7 +20,7 @@ def channelDescribeOrganizationSeals(agent, info_type, seal_id, limit, offset):
         req = models.ChannelDescribeOrganizationSealsRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 查询信息类型，为1时返回授权用户，为其他值时不返回
@@ -42,7 +42,7 @@ def channelDescribeOrganizationSeals(agent, info_type, seal_id, limit, offset):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
 
     InfoType = 1

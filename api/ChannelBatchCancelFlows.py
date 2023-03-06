@@ -21,7 +21,7 @@ def channelBatchCancelFlows(agent, flow_ids, cancel_message, cancel_message_form
         req = models.ChannelBatchCancelFlowsRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息。 
+        # 第三方平台应用相关信息
 	    # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 签署流程Id数组，最多100个，超过100不处理
@@ -45,7 +45,7 @@ def channelBatchCancelFlows(agent, flow_ids, cancel_message, cancel_message_form
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
     FlowIds = ["******************"]
     CancelMessage = ""

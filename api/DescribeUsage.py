@@ -6,7 +6,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def describeUsage(agent, start_date, end_date, need_aggregate, limit, offset):
     """
-        此接口（DescribeUsage）用于获取渠道所有合作企业流量消耗情况。
+        此接口（DescribeUsage）用于获取第三方应用集成所有合作企业流量消耗情况。
         注: 此接口每日限频2次，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
         详细参考 https://cloud.tencent.com/document/api/1420/61520
     """
@@ -26,8 +26,8 @@ def describeUsage(agent, start_date, end_date, need_aggregate, limit, offset):
         # 开始时间到结束时间的区间长度小于等于90天。
         req.EndDate = end_date
         # 是否汇总数据，默认不汇总。
-        # 不汇总：返回在统计区间内渠道下所有企业的每日明细，即每个企业N条数据，N为统计天数；
-        # 汇总：返回在统计区间内渠道下所有企业的汇总后数据，即每个企业一条数据；
+        # 不汇总：返回在统计区间内第三方应用集成下所有企业的每日明细，即每个企业N条数据，N为统计天数；
+        # 汇总：返回在统计区间内第三方应用集成下所有企业的汇总后数据，即每个企业一条数据；
         req.NeedAggregate = need_aggregate
         # 单次返回的最多条目数量。默认为1000，且不能超过1000。
         req.Limit = limit
@@ -44,7 +44,7 @@ def describeUsage(agent, start_date, end_date, need_aggregate, limit, offset):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
 
     StartDate = "2022-06-01"

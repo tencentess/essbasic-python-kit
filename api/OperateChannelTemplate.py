@@ -6,9 +6,9 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def operateChannelTemplate(agent, operate_type, template_id, proxy_organization_open_ids, auth_tag):
     """
-        用于针对渠道模板库中的模板对子客企业可见性的查询和设置，不会直接分配渠道模板给子客企业。
+        用于针对平台企业模板库中的模板对子客企业可见性的查询和设置，不会直接分配平台企业模板给子客企业。
         1、OperateType=select时：
-        查询渠道模板库
+        查询平台企业模板库
         2、OperateType=update或者delete时：
         对子客企业进行模板库中模板可见性的修改、删除操作。
         详细参考 https://cloud.tencent.com/document/api/1420/66367
@@ -21,12 +21,12 @@ def operateChannelTemplate(agent, operate_type, template_id, proxy_organization_
         req = models.OperateChannelTemplateRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 操作类型，查询:"SELECT"，删除:"DELETE"，更新:"UPDATE"
         req.OperateType = operate_type
-        # 渠道方模板库模板唯一标识
+        # 平台企业模板库模板唯一标识
         req.TemplateId = template_id
         # 合作企业方第三方机构唯一标识数据，支持多个， 用","进行分隔
         req.ProxyOrganizationOpenIds = proxy_organization_open_ids
@@ -43,7 +43,7 @@ def operateChannelTemplate(agent, operate_type, template_id, proxy_organization_
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
 
     OperateType = "SELECT"

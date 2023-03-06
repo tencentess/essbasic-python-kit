@@ -28,7 +28,7 @@ def BuildApprovers(recipient_id):
     # 传入企业静默签署
     # flow_approver_infos.append(BuildServerSignApprover())
 
-    # 设置模版中的参与方RecipientId
+    # 设置模板中的参与方RecipientId
     for i in flow_approver_infos:
         i.RecipientId = recipient_id
 

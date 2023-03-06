@@ -23,7 +23,7 @@ def channelCreateBatchCancelFlowUrl(agent, flow_ids):
         req = models.ChannelCreateBatchCancelFlowUrlRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 签署流程Id数组
@@ -39,7 +39,7 @@ def channelCreateBatchCancelFlowUrl(agent, flow_ids):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
     FlowIds = ["******************"]
 

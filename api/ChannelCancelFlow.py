@@ -7,7 +7,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 def channelCancelFlow(agent, flow_id, cancel_message, cancel_message_format):
     """
         ChannelCancelFlow
-        渠道版撤销签署流程接口，可以撤回：未全部签署完成；不可以撤回（终态）：已全部签署完成、已拒签、已过期、已撤回。
+        第三方应用集成撤销签署流程接口，可以撤回：未全部签署完成；不可以撤回（终态）：已全部签署完成、已拒签、已过期、已撤回。
         注意:
         能撤回合同的只能是合同的发起人或者发起企业的超管、法人
         详细参考 https://cloud.tencent.com/document/api/1420/81869
@@ -20,7 +20,7 @@ def channelCancelFlow(agent, flow_id, cancel_message, cancel_message_format):
         req = models.ChannelCancelFlowRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         req.Agent = agent
         # 签署流程编号
         req.FlowId = flow_id
@@ -43,7 +43,7 @@ def channelCancelFlow(agent, flow_id, cancel_message, cancel_message_format):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
     FlowId = "******************"
     CancelMessage = ""

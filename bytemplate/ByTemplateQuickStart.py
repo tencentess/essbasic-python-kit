@@ -11,9 +11,9 @@ from api.CreateFlowByTemplateDirectly import createFlowByTemplateDirectly
 from config.Config import *
 
 '''
-本示例用于渠道版接口对接，通过模板快速发起第一份合同
+本示例用于第三方应用集成接口对接，通过模板快速发起第一份合同
 建议配合文档进行操作，先修改config里的基本参数以及对应环境域名，然后跑一次
-渠道版主要针对渠道企业-代理子客发起合同，简要步骤主要是
+第三方应用集成主要针对平台企业-代理子客发起合同，简要步骤主要是
     1. 通过CreateConsoleLoginUrl引导子客企业完成电子签的实名认证 - 子客企业在电子签配置印章等
     2. 通过简单封装的CreateFlowByTemplateDirectly接口快速发起一份合同，并得到签署链接
     3. 在小程序签署合同，通过API下载合同
@@ -23,7 +23,7 @@ https://cloud.tencent.com/document/product/1420/61534
 '''
 def ByTemplateQuickStart():
     # Step 1 登录子客控制台
-    # 渠道子客企业真实名称
+    # 子客企业真实名称
     ProxyOrganizationName = "好企业"
 
     # 创建控制台链接

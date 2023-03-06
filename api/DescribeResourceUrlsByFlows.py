@@ -17,7 +17,7 @@ def describeResourceUrlsByFlows(agent, flow_ids):
         # 实例化一个请求对象,每个接口都会对应一个request对象
         req = models.DescribeResourceUrlsByFlowsRequest()
 
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 查询资源所对应的签署流程Id，最多支持50个
@@ -33,7 +33,7 @@ def describeResourceUrlsByFlows(agent, flow_ids):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
     # 资源所对应的签署流程Id
     FlowIds = ["****************"]

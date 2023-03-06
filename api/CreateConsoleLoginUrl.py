@@ -6,7 +6,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def createConsoleLoginUrl(agent, proxy_organization_name):
     """
-        用于创建渠道子客企业控制台Web/移动登录链接。登录链接是子客控制台的唯一入口。
+        用于创建子客企业控制台Web/移动登录链接。登录链接是子客控制台的唯一入口。
         若子客企业未激活，会进入企业激活流程，首次参与激活流程的经办人会成为超管。
         （若企业激活过程中填写信息有误，需要重置激活流程，可以换一个经办人OpenId获取新的链接进入。）
         若子客企业已激活，使用了新的经办人OpenId进入，则会进入经办人的实名流程。
@@ -21,11 +21,11 @@ def createConsoleLoginUrl(agent, proxy_organization_name):
         # 实例化一个请求对象,每个接口都会对应一个request对象
         req = models.CreateConsoleLoginUrlRequest()
 
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.AppId、Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填
         agent.ProxyAppId = ""
         req.Agent = agent
-        # 渠道侧合作企业名称，最大长度64个字符
+        # 子客企业名称，最大长度64个字符
         req.ProxyOrganizationName = proxy_organization_name
 
         # 其他参数根据业务需要参考接口文档

@@ -17,7 +17,7 @@ def channelDescribeEmployees(agent, filters, limit, offset):
         req = models.ChannelDescribeEmployeesRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 查询过滤实名用户，Key为Status，Values为["IsVerified"]
@@ -39,7 +39,7 @@ def channelDescribeEmployees(agent, filters, limit, offset):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
 
     Filter = models.Filter()

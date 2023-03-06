@@ -22,7 +22,7 @@ def createFlowByTemplateDirectly(flow_name, template_id, flow_approver_infos):
         # FlowInfos[i].FormFields = [BuildFormField("姓名", "张三")]
         flow_infos.append(fillFlowInfo(template_id, flow_name, flow_approver_infos))
 
-    # 设置渠道应用相关信息
+    # 设置第三方平台应用相关信息
     agent = fillAgent()
 
     # 发起签署

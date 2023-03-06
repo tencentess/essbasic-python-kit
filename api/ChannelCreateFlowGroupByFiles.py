@@ -17,7 +17,7 @@ def channelCreateFlowGroupByFiles(agent, flow_file_infos, flow_group_name):
         req = models.ChannelCreateFlowGroupByFilesRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 每个子合同的发起所需的信息，数量限制2-100
@@ -36,7 +36,7 @@ def channelCreateFlowGroupByFiles(agent, flow_file_infos, flow_group_name):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
 
     FlowGroupName = "合同组名称"

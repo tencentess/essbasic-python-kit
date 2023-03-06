@@ -7,7 +7,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def createSealByImage(agent, seal_name, seal_image):
     """
-        渠道通过图片为子客代创建印章，图片最大5MB
+        平台企业通过图片为子客代创建印章，图片最大5MB
         详细参考 https://cloud.tencent.com/document/api/1420/73067
     """
     try:
@@ -18,7 +18,7 @@ def createSealByImage(agent, seal_name, seal_image):
         req = models.CreateSealByImageRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 印章名称，最大长度不超过50字符
@@ -36,7 +36,7 @@ def createSealByImage(agent, seal_name, seal_image):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
 
     SealName = "印章名称"

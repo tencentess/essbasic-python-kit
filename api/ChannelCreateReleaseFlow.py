@@ -6,7 +6,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def channelCreateReleaseFlow(agent, need_relieved_flow_id, relive_info, released_approvers, callback_url):
     """
-        渠道版发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
+        第三方应用集成发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
         合同发起人必须在电子签已经进行实名。
         详细参考 https://cloud.tencent.com/document/api/1420/83461
     """
@@ -18,7 +18,7 @@ def channelCreateReleaseFlow(agent, need_relieved_flow_id, relive_info, released
         req = models.ChannelCreateReleaseFlowRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 待解除的流程编号（即原流程的编号）
@@ -43,7 +43,7 @@ def channelCreateReleaseFlow(agent, need_relieved_flow_id, relive_info, released
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
     NeedRelievedFlowId = "******************"
     ReliveInfo = models.RelieveInfo()

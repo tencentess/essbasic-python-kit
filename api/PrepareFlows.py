@@ -19,7 +19,7 @@ def prepareFlows(agent, flow_infos, jump_url):
         req = models.PrepareFlowsRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 多个合同（签署流程）信息，最大支持20个签署流程。
@@ -37,7 +37,7 @@ def prepareFlows(agent, flow_infos, jump_url):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
 
     flowInfo = models.FlowInfo()

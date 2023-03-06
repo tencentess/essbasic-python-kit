@@ -7,7 +7,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 def channelCreateFlowByFiles(agent, flow_approver_infos, flow_name, file_id):
     """
-        用于渠道版通过文件创建签署流程。
+        用于第三方应用集成通过文件创建签署流程。
         注意事项：该接口需要依赖“多文件上传”接口生成pdf资源编号（FileIds）进行使用。
         此接口静默签能力不可直接使用，需要运营申请
         详细参考 https://cloud.tencent.com/document/api/1420/73068
@@ -24,7 +24,7 @@ def channelCreateFlowByFiles(agent, flow_approver_infos, flow_name, file_id):
         # 签署文件资源Id列表，目前仅支持单个文件
         req.FileIds = [file_id]
 
-        # 渠道应用相关信息。 
+        # 第三方平台应用相关信息。
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 签署流程签约方列表，最多不超过5个参与方
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     FileId = "********************************"
     # 签署流程名称, 最大长度200个字符
     FlowName = "我的第一份文件合同"
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息。
     Agent = fillAgent()
     FlowApproverInfos = []
 

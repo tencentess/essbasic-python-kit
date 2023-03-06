@@ -18,7 +18,7 @@ def channelCancelMultiFlowSignQRCode(agent, qr_code_id):
         req = models.ChannelCancelMultiFlowSignQRCodeRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息。
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 二维码ID
@@ -34,7 +34,7 @@ def channelCancelMultiFlowSignQRCode(agent, qr_code_id):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息。
     Agent = fillAgent()
     # 二维码ID
     QrCodeId = "******************"

@@ -17,7 +17,7 @@ def channelVerifyPdf(agent, flow_id):
         req = models.ChannelVerifyPdfRequest()
 
         # 传入相关参数
-        # 渠道应用相关信息
+        # 第三方平台应用相关信息
         # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
         req.Agent = agent
         # 合同Id，流程Id
@@ -33,7 +33,7 @@ def channelVerifyPdf(agent, flow_id):
     测试
 '''
 if __name__ == '__main__':
-    # 渠道应用相关信息
+    # 第三方平台应用相关信息
     Agent = fillAgent()
 
     FlowId = "******************"

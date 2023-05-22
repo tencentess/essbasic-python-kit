@@ -2,6 +2,7 @@
 import hashlib
 import hmac
 
+# 回调消息验证签名
 
 def sign(value, key):
     j = hmac.new(key.encode('utf-8'), value.encode('utf-8'), digestmod=hashlib.sha256)

@@ -19,7 +19,7 @@ def channelCreateMultiFlowSignQRCode(agent, template_id, flow_name):
         req = models.ChannelCreateMultiFlowSignQRCodeRequest()
 
         # 第三方平台应用相关信息。
-        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
         req.Agent = agent
         # 模板Id
         req.TemplateId = template_id

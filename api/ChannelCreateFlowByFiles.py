@@ -25,7 +25,7 @@ def channelCreateFlowByFiles(agent, flow_approver_infos, flow_name, file_id):
         req.FileIds = [file_id]
 
         # 第三方平台应用相关信息。
-        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
         req.Agent = agent
         # 签署流程签约方列表，最多不超过5个参与方
         req.FlowApprovers = flow_approver_infos

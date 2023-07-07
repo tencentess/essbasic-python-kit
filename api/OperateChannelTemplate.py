@@ -22,7 +22,7 @@ def operateChannelTemplate(agent, operate_type, template_id, proxy_organization_
 
         # 传入相关参数
         # 第三方平台应用相关信息
-        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
         req.Agent = agent
         # 操作类型，查询:"SELECT"，删除:"DELETE"，更新:"UPDATE"
         req.OperateType = operate_type

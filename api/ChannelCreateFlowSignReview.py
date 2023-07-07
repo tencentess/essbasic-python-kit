@@ -20,7 +20,7 @@ def channelCreateFlowSignReview(agent, flow_id, review_type, review_message, rec
 
         # 传入相关参数
         # 第三方平台应用相关信息
-        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
         req.Agent = agent
         # 签署流程编号
         req.FlowId = flow_id

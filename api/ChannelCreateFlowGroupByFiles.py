@@ -18,7 +18,7 @@ def channelCreateFlowGroupByFiles(agent, flow_file_infos, flow_group_name):
 
         # 传入相关参数
         # 第三方平台应用相关信息
-        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
         req.Agent = agent
         # 每个子合同的发起所需的信息，数量限制2-100
         # 详细参考 https://cloud.tencent.com/document/product/1420/61534

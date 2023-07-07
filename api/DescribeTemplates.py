@@ -17,7 +17,7 @@ def describeTemplates(agent, template_id):
         req = models.DescribeTemplatesRequest()
 
         # 第三方平台应用相关信息
-        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
         req.Agent = agent
         # 模板唯一标识，查询单个模板时使用
         req.TemplateId = template_id

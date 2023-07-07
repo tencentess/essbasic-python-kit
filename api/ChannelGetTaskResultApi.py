@@ -18,7 +18,7 @@ def channelGetTaskResultApi(agent, task_id):
 
         # 传入相关参数
         # 第三方平台应用相关信息
-        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
+        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
         req.Agent = agent
         # 任务Id，通过ChannelCreateConvertTaskApi接口获得
         req.TaskId = task_id

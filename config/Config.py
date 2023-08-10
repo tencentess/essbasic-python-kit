@@ -35,7 +35,7 @@ ProxyOperatorOpenId = "****************"
 # ServerSignSealId 企业方静默签用的印章Id，电子签控制台印章模块获取
 ServerSignSealId = "****************"
 
-# EndPoint API域名，现网使用 ess.tencentcloudapi.com
+# EndPoint API域名，现网使用 essbasic.tencentcloudapi.com
 EndPoint = "essbasic.test.ess.tencent.cn"
 
 # FileServiceEndPoint 文件服务域名，现网使用 file.ess.tencent.cn

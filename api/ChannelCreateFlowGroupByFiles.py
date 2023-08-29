@@ -5,10 +5,7 @@ from common.CreateFlowUtils import initClient, fillAgent
 
 
 def channelCreateFlowGroupByFiles(agent, flow_file_infos, flow_group_name):
-    """
-        用于通过多文件创建合同组签署流程。
-        详细参考 https://cloud.tencent.com/document/api/1420/80390
-    """
+
     try:
         # 实例化一个client
         client = initClient()
@@ -16,14 +13,10 @@ def channelCreateFlowGroupByFiles(agent, flow_file_infos, flow_group_name):
         # 实例化一个请求对象,每个接口都会对应一个request对象
         req = models.ChannelCreateFlowGroupByFilesRequest()
 
-        # 传入相关参数
-        # 第三方平台应用相关信息
-        # 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
         req.Agent = agent
-        # 每个子合同的发起所需的信息，数量限制2-100
-        # 详细参考 https://cloud.tencent.com/document/product/1420/61534
+
         req.FlowFileInfos = flow_file_infos
-        # 合同组名称，长度不超过200个字符
+
         req.FlowGroupName = flow_group_name
 
         # 返回的resp是一个ChannelCreateFlowGroupByFilesResponse的实例，与请求对象对应
